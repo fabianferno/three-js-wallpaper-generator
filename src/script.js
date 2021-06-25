@@ -1,6 +1,5 @@
 import "./style.css";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
@@ -19,7 +18,8 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 // Objects
-const geometry = new THREE.SphereBufferGeometry(0.5, 64, 64);
+const sphereGeomtry = new THREE.SphereBufferGeometry(0.5, 64, 64);
+const torusGeometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
 
 // Materials
 const material = new THREE.MeshStandardMaterial();
@@ -29,8 +29,13 @@ material.color = new THREE.Color(0x282929);
 material.normalMap = normalTexture;
 
 // Mesh
-const sphere = new THREE.Mesh(geometry, material);
+const sphere = new THREE.Mesh(sphereGeomtry, material);
+const torus = new THREE.Mesh(torusGeometry, material);
+
+sphere.position.set(0, 0, 0);
+torus.position.set(-0.6, -0.2, -0.5);
 scene.add(sphere);
+//scene.add(torus);
 
 // Light 1
 const pointLight = new THREE.PointLight(0xffffff, 0.1);
@@ -87,7 +92,7 @@ scene.add(pointLight3);
  */
 const sizes = {
   width: window.innerWidth,
-  height: window.innerHeight,
+  height: window.innerHeight - window.innerHeight * 0.25,
 };
 
 window.addEventListener("resize", () => {
@@ -114,14 +119,24 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
+
+// const camera = new THREE.OrthographicCamera(
+//   sizes.width / -2,
+//   sizes.width / 2,
+//   sizes.height / 2,
+//   sizes.height / -2,
+//   1,
+//   1000
+// );
+
 camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 2;
 scene.add(camera);
 
 //Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
+// const controls = new OrbitControls(camera, canvas);
+// controls.enableDamping = true;
 
 /**
  * Renderer
@@ -154,7 +169,7 @@ function onDocumentMouseMove(event) {
 }
 
 function updateSphere(event) {
-  sphere.position.y = window.scrollY * 0.001;
+  sphere1.position.y = window.scrollY * 0.001;
 }
 
 window.addEventListener("scroll", updateSphere);
@@ -175,8 +190,16 @@ const tick = () => {
   sphere.position.z += -0.15 * (targetY - sphere.rotation.x);
   sphere.rotation.z += -0.1 * (targetY - sphere.rotation.x);
 
+  // Update objects
+  torus.rotation.y = 0.5 * elapsedTime;
+
+  torus.rotation.y += 0.5 * (targetX - torus.rotation.y);
+  torus.rotation.x += 0.05 * (targetY - torus.rotation.x);
+  torus.position.z += 0.15 * (targetY - torus.rotation.x);
+  torus.rotation.z += -0.1 * (targetY - torus.rotation.x);
+
   // Update Orbital Controls
-  // controls.update()
+  // controls.update();
 
   // Render
   renderer.render(scene, camera);
