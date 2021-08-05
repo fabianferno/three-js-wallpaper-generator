@@ -9,7 +9,7 @@ const textureLoader = new THREE.TextureLoader();
 const normalTexture = textureLoader.load("/textures/NormalMap.png");
 
 // Debug
-const gui = new dat.GUI();
+//const gui = new dat.GUI();
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -35,7 +35,7 @@ const torus = new THREE.Mesh(torusGeometry, material);
 sphere.position.set(0, 0, 0);
 torus.position.set(-0.6, -0.2, -0.5);
 scene.add(sphere);
-//scene.add(torus);
+scene.add(torus);
 
 // Light 1
 const pointLight = new THREE.PointLight(0xffffff, 0.1);
@@ -92,7 +92,7 @@ scene.add(pointLight3);
  */
 const sizes = {
   width: window.innerWidth,
-  height: window.innerHeight - window.innerHeight * 0.25,
+  height: window.innerHeight,
 };
 
 window.addEventListener("resize", () => {
