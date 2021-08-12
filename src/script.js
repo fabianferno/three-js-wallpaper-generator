@@ -3,6 +3,17 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
+var url = window.location.href;
+if (url.indexOf("?") > -1) {
+  const urlParams = new URLSearchParams(window.location.search);
+  var text = urlParams.get("text");
+  var sub_text = urlParams.get("subtext");
+}
+
+document.getElementById("text-holder").innerHTML =
+  text !== undefined ? text : "Super Skywalker";
+document.getElementById("sub-text-holder").innerHTML =
+  sub_text !== undefined ? sub_text : "// THIS TOO SHALL PASS /";
 // Loading
 const textureLoader = new THREE.TextureLoader();
 
