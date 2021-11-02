@@ -1,7 +1,10 @@
 ## Simple 3D Live Wallpaper Generator using ThreeJS. Use with Lively Wallpaper.
 ### Create own wallpaper here [/create.html](https://wallpaper.fabianferno.tech/create.html)
 
-# Three.js Starter
+
+----
+
+#### Three.js Starter
 Courtesy of Bruno Simon of https://threejs-journey.xyz/
 
 ## Setup
