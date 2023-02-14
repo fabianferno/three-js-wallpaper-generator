@@ -1,5 +1,5 @@
 ## Simple 3D Live Wallpaper Generator using ThreeJS. Use with Lively Wallpaper.
-### Create own wallpaper here [/create.html](https://wallpaper.fabianferno.tech/create.html)
+#### Create own wallpaper here [/create.html](https://wallpaper.fabianferno.com/create.html)
 
 
 ----
